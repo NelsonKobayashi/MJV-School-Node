@@ -1,4 +1,4 @@
-/* import express from 'express';
+import express from 'express';
 import { Request, Response, Router } from 'express';
 import cors from 'cors';
 
@@ -20,4 +20,4 @@ const port = 3000;
 
 app.listen(port, () => {
     console.log(`Exercício rodando normalmente no endereço http://localhost:${port}`);
-}); */
+});
