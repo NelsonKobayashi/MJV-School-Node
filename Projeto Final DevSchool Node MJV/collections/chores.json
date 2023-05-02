@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "643ea07c6a6b436e2386c2b4"
+  },
+  "id": "MAT-01",
+  "name": "Tabuada",
+  "description": "Escrever a mão a tabuada de 1 a 5",
+  "deadline": "20/04/2023",
+  "createdAt": {
+    "$date": "2023-04-18T13:51:53.736Z"
+  },
+  "teacher": "Nathan",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643ea0ff6a6b436e2386c2b7"
+  },
+  "id": "POR-01",
+  "name": "Exercício do livro",
+  "description": "Exercício de gramática - pág. 12 e 13",
+  "deadline": "22/04/2023",
+  "createdAt": {
+    "$date": "2023-04-18T13:51:53.736Z"
+  },
+  "teacher": "Ieda",
+  "__v": 0
+}]

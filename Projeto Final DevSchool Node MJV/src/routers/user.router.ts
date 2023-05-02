@@ -2,12 +2,13 @@ import { Request, Response, Router} from 'express';
 import UserService from '../services/user.service';
 import { authorizationMiddleware } from '../middlewares/authorization.middleware';
 
-
 const router = Router();
+const { userValidate } = require('../config/validate');
+
 
 router.get('/', authorizationMiddleware, async (req: Request, res: Response) => {
     const user = await UserService.getAll();
-    res.send(user);
+    res.status(200).send(user);
 });
 
 router.get('/:email', authorizationMiddleware, async (req: Request, res: Response) => {
@@ -17,9 +18,13 @@ router.get('/:email', authorizationMiddleware, async (req: Request, res: Respons
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    console.log("passou aqui");
-    await UserService.create(req.body);
-    res.status(201).send({message: 'Usuário adicionado com sucesso'});
+    const { error } = await userValidate(req.body);
+    if(error) {
+        res.status(400).send({ message: error.message });
+    } else {
+        UserService.create(req.body);
+        res.status(201).send({message: 'Usuário adicionado com sucesso'});        
+    }
 });
 
 router.post('/authorization', async (req: Request, res: Response) => {

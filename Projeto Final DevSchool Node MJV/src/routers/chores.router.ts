@@ -3,6 +3,7 @@ import ChoresService from '../services/chores.service';
 import { authorizationMiddleware } from '../middlewares/authorization.middleware';
 
 const router = Router();
+const { choresValidate } = require('../config/validate');
 
 router.get('/', authorizationMiddleware, async (req: Request, res: Response) => {
     const chores = await ChoresService.getAll();
@@ -16,9 +17,13 @@ router.get('/:id', authorizationMiddleware, async (req: Request, res: Response) 
 });
 
 router.post('/', authorizationMiddleware, async (req: Request, res: Response) => {
-    await ChoresService.create(req.body);
+    const { error } = await choresValidate(req.body);
+    if(error) {
+        res.status(400).send({ message: error.message });
+    } else {
+    ChoresService.create(req.body);
     res.status(201).send({message: 'Tarefa adicionada com sucesso'});
-    
+    }
 });
 
 router.delete('/remove/:id', authorizationMiddleware, async (req: Request, res: Response) => {

@@ -1,0 +1,469 @@
+{
+    "openapi": "3.0.0",
+    "info" : {
+        "title" : "Api de Exercícios para Casa - Escola do Futuro",
+        "description" : "Essa Api tem como objetivo facilitar para alunos a consulta de exercícios para casa e também para os pais poderem acompanhar seus filhos com mais facilidade.",
+        "license": { 
+        "name": "MIT", 
+        "url": " https://opensource.org/licenses/MIT "
+        },
+        "contact" : {
+            "email" : "koba.nelson@gmail.com"
+        },
+        "version" : "1.0.0"
+
+    },
+    "servers" : [
+        {
+            "url" : "http://localhost:3000",
+            "description" : "API de Teste"
+        }
+    ],
+    "paths" : {
+        "/user" : {
+            "post" : {
+                "summary" : "Cadastro de usuário",
+                "description" : "Essa rota é responsável por cadastrar um novo usuário",
+                "tags" : ["User"],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/User"
+                            },
+                            "examples" : {
+                                "user" : {
+                                    "value" : {
+                                        "name" : "Nelson Koba",
+                                        "email" :  "nelsonkoba@gmail.com",
+                                        "password" : "oboknoslen",
+                                        "phone" : "11 99988-7766"
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/User"                                    
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+            },
+            "get" : {
+                "description" : "Localiza todos os usuários.",
+                "summary" : "Busca na base de dados todos os usuários cadastrados.",
+                "tags" : ["User"],
+                "security" : [{ "bearerAuth" : []}],
+                "responses" : {
+                    "200" : {
+                        "description" : "Ok",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }                
+            }
+        },
+        "/user/authorization" : {
+            "post" : {
+                "summary" : "Login de usuário",
+                "description" : "Essa rota é responsável por verfificar se o usuário existe no banco e gerar um token de acesso.",
+                "tags" : ["User"],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/Authorization"
+                            },
+                            "examples" : {
+                                "user" : {
+                                    "value" : {
+                                        "email" :  "nelsonkoba@gmail.com",
+                                        "password" : "oboknoslen"
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                },
+                "responses" : {
+                    "401" : {
+                        "description" : "Usuário não encontrado."
+                    },
+                    "200" : {
+                        "description" : "Ok",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/Authorization"
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+            }
+        },
+        "/user/{email}" : {
+            "get" : {
+                "description" : "Localiza o usuário pelo email.",
+                "summary" : "Busca qualquer usuário cadastrado pelo email informado.",
+                "tags" : ["User"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                        "name": "email",
+                        "in" : "path",
+                        "description" : "Email para busca de usuário existente.",
+                        "required" : true
+                    }
+                ],
+                "responses" : {
+                    "401" : {
+                        "description" : "Usuário não encontrado."
+                    },
+                    "200" : {
+                        "description" : "Ok",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }, 
+            "put" : {
+                "description" : "Altera o usuário pelo email informado.",
+                "summary" : "Altera qualquer informação do usuário  pelo email informado.",
+                "tags" : ["User"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                        "name": "email",
+                        "in" : "path",
+                        "description" : "Email para alteração de usuário existente.",
+                        "required" : true
+                    }
+                ],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/User"
+                            },
+                            "examples" : {
+                                "user" : {
+                                    "value" : {
+                                        "name" : "Yoshiaki Koba",
+                                        "email" :  "yoshikoba@gmail.com",
+                                        "password" : "abokikaihsoy",
+                                        "phone" : "11 99988-7766"
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                },
+                "responses" : {
+                    "400" : {
+                        "description" : "Bad Request."
+                    },
+                    "200" : {
+                        "description" : "Usuário alterado com sucesso",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/remove/{email}" : {
+            "delete" : {
+                "description" : "Apaga o usuário pelo email informado.",
+                "summary" : "Apaga qualquer usuário  pelo email informado.",
+                "tags" : ["User"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                    "name": "email",
+                    "in" : "path",
+                    "description" : "Email para remoção de usuário existente.",
+                    "required" : true
+                    }
+                ],
+                "responses" : {
+                    "400" : {
+                    "description" : "Bad Request."
+                    },
+                    "200" : {
+                        "description" : "Usuário removido com sucesso."
+                    }
+                }
+            }
+        },
+
+        "/chores" : {
+            "get" : {
+                "description" : "Localiza todos as tarefas.",
+                "summary" : "Busca na base de dados todas as tarefas cadastradas.",
+                "tags" : ["Chores"],
+                "security" : [{ "bearerAuth" : []}],
+                "responses" : {
+                    "200" : {
+                        "description" : "Ok",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/Chores"
+                                }
+                            }
+                        }
+                    }
+                }                
+            },
+            "post" : {
+                "summary" : "Cadastro de tarefa",
+                "description" : "Essa rota é responsável por cadastrar uma nova tarefa",
+                "tags" : ["Chores"],
+                "security" : [{ "bearerAuth" : []}],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/Chores"
+                            },
+                            "examples" : {
+                                "chores" : {
+                                    "value" : {
+                                        "id" : "MAT-01", 
+                                        "name" : "Tabuada 1~5",
+                                        "description" : "Realizar a tabuada do 1 ao 5, até a próxima aula de matemática.",
+                                        "deadline" : "05/05",
+                                        "teacher" : "Professor José"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses" : {
+                    "201" : {
+                        "description" : "Created",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/Chores"                                    
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+            }
+
+        },
+        "/chores/{id}" : {
+            "get" : {
+                "description" : "Localiza a tarefa pelo id.",
+                "summary" : "Busca qualquer tarefa cadastrada pelo id informado.",
+                "tags" : ["Chores"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                        "name": "id",
+                        "in" : "path",
+                        "description" : "ID para busca de uma tarefa existente.",
+                        "required" : true
+                    }
+                ],
+                "responses" : {
+                    "401" : {
+                        "description" : "Tarefa não encontrada."
+                    },
+                    "200" : {
+                        "description" : "Ok",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/Chores"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "description" : "Altera a tarefa pelo id informado.",
+                "summary" : "Altera qualquer informação da tarefa  pelo id informado.",
+                "tags" : ["Chores"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                        "name": "id",
+                        "in" : "path",
+                        "description" : "ID para alteração de tarefa existente.",
+                        "required" : true
+                    }
+                ],
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/Chores"
+                            },
+                            "examples" : {
+                                "user" : {
+                                    "value" : {
+                                        "id" : "MAT-01", 
+                                        "name" : "Tabuada 1~9",
+                                        "description" : "Realizar a tabuada do 1 ao 9, até a próxima aula de matemática.",
+                                        "deadline" : "07/05",
+                                        "teacher" : "Professor José"
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                },
+                "responses" : {
+                    "400" : {
+                        "description" : "Bad Request."
+                    },
+                    "200" : {
+                        "description" : "Tarefa alterada com sucesso",
+                        "content" : {
+                            "aplication/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "$ref" : "#/components/schemas/Chores"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/chores/remove/{id}" : {
+            "delete" : {
+                "description" : "Apaga a tarefa pelo id informado.",
+                "summary" : "Apaga qualquer tarefa  pelo id informado.",
+                "tags" : ["Chores"],
+                "security" : [{ "bearerAuth" : [] }],
+                "parameters" : [
+                    {
+                    "name": "id",
+                    "in" : "path",
+                    "description" : "ID para remoção de tarefa existente.",
+                    "required" : true
+                    }
+                ],
+                "responses" : {
+                    "400" : {
+                    "description" : "Bad Request."
+                    },
+                    "200" : {
+                        "description" : "Tarefa removida com sucesso."
+                    }
+                }
+            }
+        }
+        
+    },
+    "components": {
+        "schemas" : {
+            "User" : {
+                "type" : "object",
+                "properties" : {
+                    "name" : {
+                        "type" : "string"
+                    },
+                    "email" : {
+                        "type" : "string"
+                    },
+                    "password" : {
+                        "type": "string"
+                    },
+                    "phone" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "Chores" : {
+                "type" : "object",
+                "properties" : {
+                    "id" : {
+                        "type" : "string"
+                    },
+                    "name" : {
+                        "type" : "string"
+                    },
+                    "description" : {
+                        "type": "string"
+                    },
+                    "deadline": { 
+                        "type" : "string"
+                    },
+                    "teacher": {
+                        "type" : "string"
+                    }    
+                }
+            },
+            "Authorization" : {
+                "type" : "object",
+                "properties" : {
+                    "email" : {
+                        "type" : "string"
+                    },
+                    "password" : {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes" : {
+            "bearerAuth" : {
+                "type" : "http",
+                "scheme" : "bearer",
+                "bearerFormat" : "JWT"
+            }
+        }
+    }
+}

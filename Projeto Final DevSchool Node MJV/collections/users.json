@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "643de1ba2c8d753e38980478"
+  },
+  "name": "Nelson",
+  "email": "nelson@email.com",
+  "password": "$2b$10$7DZy8YvlCWer2rKUTzFVfe6F1MnQoQAIS3JODxRAGXlCBdYR17jxO",
+  "phone": "(11) 98987-5436",
+  "createdAt": {
+    "$date": "2023-04-18T00:18:00.729Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643dee9c44cda16a2a0b8ac7"
+  },
+  "name": "Miyuki",
+  "email": "miyuki@email.com",
+  "password": "$2b$10$Ae/YYrNPGwR3p1suw4QHFOdymJ17nC.67w1chGSpCIsjhKs32UQUS",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T01:01:14.755Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643deeac44cda16a2a0b8ac9"
+  },
+  "name": "Haruka",
+  "email": "haruka@email.com",
+  "password": "$2b$10$xbx3OOOxsa/7kGHIz/x/quiXZ7sigts69mZQwGYhTkydobWYHUVJq",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T01:01:14.755Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643deeb944cda16a2a0b8acb"
+  },
+  "name": "Ethan",
+  "email": "ethan@email.com",
+  "password": "$2b$10$SzrLxZ/eGIXRJybkWPsYMOP2.DJ6ckoUvL9CBxk5AecNHoYrOiHcG",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T01:01:14.755Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e329544cda16a2a0b8ad6"
+  },
+  "name": "Nelson",
+  "email": "nelson@email.com",
+  "password": "$2b$10$TBDzHP4HWt1MvygfZj4oLuuGxoDgAUGG/lTF.KoCI10zPQZNfrO.C",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T01:01:14.755Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e9ca73fe61e2932d0e35b"
+  },
+  "name": "Joao",
+  "email": "joao@email.com",
+  "password": "$2b$10$V3jBupE9Ip4hAG1MMa9RNuXCH/iFI9LH1yIu..XaVsMzrGX9GyNvu",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T13:35:29.246Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e9d20307352fc61d0ab80"
+  },
+  "name": "Admin",
+  "email": "admin@email.com",
+  "password": "$2b$10$6NpD2J/1pHRMpFAtj/kqvORxhsVh9yV07q8Xf2k4.lb4WwVQksKcm",
+  "phone": "(11) 98767-8956",
+  "createdAt": {
+    "$date": "2023-04-18T13:37:24.028Z"
+  },
+  "__v": 0
+}]
